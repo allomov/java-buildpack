@@ -103,18 +103,19 @@ module JavaBuildpack
       end
 
       def override_resources?
-        !!ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH']
+        !!ENV["JBP_CONFIG_TOMCAT_RESOURCE_PATH"]
       end
 
       def override_resources
-        resource_folder = ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH']
+        resource_folder = ENV["JBP_CONFIG_TOMCAT_RESOURCE_PATH"]
 
         with_timing "Overriding resources located in folder #{resource_folder} defined by $JBP_CONFIG_TOMCAT_RESOURCE_PATH varible" do
           puts "Current folder: #{Dir.pwd}"
-          resource_path = File.join(@droplet.root, ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH'])
+          resource_path = File.join(@droplet.root, ENV["JBP_CONFIG_TOMCAT_RESOURCE_PATH"])
+          target_path = File.join(@droplet.root, ".java-buildpack")
           puts "resource_path: #{resource_path}"
           if File.exist?(resource_path)
-            FileUtils.cp_r("#{resource_path}/.", @droplet.sandbox)
+            FileUtils.cp_r("#{resource_path}/.", target_path)
           else
             puts "Can't find resource folder - Skipping override."
           end
