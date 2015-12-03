@@ -92,8 +92,32 @@ module JavaBuildpack
           shell "tar xzf #{file.path} -C #{@droplet.sandbox} --strip 1 --exclude webapps 2>&1"
 
           @droplet.copy_resources
-          configure_linking
-          configure_jasper
+
+          if override_resources?
+            override_resources
+          else
+            configure_linking
+            configure_jasper
+          end
+        end
+      end
+
+      def override_resources?
+        !!ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH']
+      end
+
+      def override_resources
+        resource_folder = ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH']
+
+        with_timing "Overriding resources located in folder #{resource_folder} defined by $JBP_CONFIG_TOMCAT_RESOURCE_PATH varible" do
+          puts "Current folder: #{Dir.pwd}"
+          resource_path = File.join(@droplet.root, ENV['JBP_CONFIG_TOMCAT_RESOURCE_PATH'])
+          puts "resource_path: #{resource_path}"
+          if File.exist?(resource_path)
+            FileUtils.cp_r("#{resource_path}/.", @droplet.sandbox)
+          else
+            puts "Can't find resource folder - Skipping override."
+          end
         end
       end
 
