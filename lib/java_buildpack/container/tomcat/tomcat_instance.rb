@@ -93,12 +93,10 @@ module JavaBuildpack
 
           @droplet.copy_resources
 
-          if override_resources?
-            override_resources
-          else
-            configure_linking
-            configure_jasper
-          end
+          configure_linking
+          configure_jasper
+
+          override_resources if override_resources?
         end
       end
 
