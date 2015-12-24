@@ -105,6 +105,10 @@ module JavaBuildpack
       def update_context
         document = read_xml context_xml
         context  = REXML::XPath.match(document, '/Context').first
+
+        watched_resource = context.add_element('WatchedResource')
+        watched_resource.add_text('WEB-INF/web.xml')
+
         context.add_element('Environment', 'name'  => "backbase/config", 
                                            'value' => "${catalina.home}/backbase.properties",
                                            'type'  => "java.lang.String", 'override' => "false")
