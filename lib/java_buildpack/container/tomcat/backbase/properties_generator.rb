@@ -54,6 +54,10 @@ module JavaBuildpack
           :"foundation.content.proxy.destination" => ENV['contentservices_url'],
           :"foundation.orchestrator.proxy.destination" => ENV['orchestrator_url'],
           :"manager.solr.url" => ENV['solr_url'],
+
+          :"orchestrator.configuration.location" => 'backbase/orchestrator/to-self-publishchains.xml',
+          :"orchestrator.filestorelocation" => "backbase/orchestrator/fileStore",
+
           }
         end
 
