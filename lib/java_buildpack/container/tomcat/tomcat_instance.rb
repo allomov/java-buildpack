@@ -105,9 +105,9 @@ module JavaBuildpack
       def update_context
         document = read_xml context_xml
         context  = REXML::XPath.match(document, '/Context').first
-        context.add_element('Environment', 'name'  =>  "backbase/config", 
+        context.add_element('Environment', 'name'  => "backbase/config", 
                                            'value' => "${catalina.home}/../backbase.properties",
-                                           'type'  => "java.lang.String", override: "false")
+                                           'type'  => "java.lang.String", 'override' => "false")
 
         datastores = {
           portal:              {name: "jdbc/portalDS", database: 'portal'},
@@ -123,8 +123,8 @@ module JavaBuildpack
             'username' => ENV['database_username'],
             'password' => ENV['database_password'],
             'url' => "jdbc:mysql://#{ENV['database_host']}:#{ENV['database_port']}/#{value[:database]}?cacheServerConfiguration=true",
-            'auth' => "Container", type: "javax.sql.DataSource", maxActive: "4", maxIdle: "2",
-            'maxWait' => "5000", validationQuery: "select 1", driverClassName: "com.mysql.jdbc.Driver",
+            'auth' => "Container", 'type' => "javax.sql.DataSource", 'maxActive' => "4", 'maxIdle' => "2",
+            'maxWait' => "5000", 'validationQuery' => "select 1", 'driverClassName' => "com.mysql.jdbc.Driver",
           )
         end
 
