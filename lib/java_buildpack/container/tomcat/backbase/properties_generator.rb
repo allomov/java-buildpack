@@ -19,7 +19,7 @@ module JavaBuildpack
           :"orchestrator.password" => ENV['orchestrator_password'],
           :"orchestrator.approvalgroups"=>"admin,manager,approvers",
           :"orchestrator.publishgroups"=>"admin,manager,publishers",
-          :"orchestrator.orchestrators.names"=>"Orchestrator",
+          :"orchestrator.orchestrators.names" => "Orchestrator",
           :"orchestrator.orchestrators.Orchestrator.address" => ENV['orchestrator_url'],
           :"orchestrator.orchestrators.Orchestrator.contextpath"=>"/",
           :"orchestrator.orchestrators.Orchestrator.username" => ENV['orchestrator_username'],
@@ -55,8 +55,11 @@ module JavaBuildpack
           :"foundation.orchestrator.proxy.destination" => ENV['orchestrator_url'],
           :"manager.solr.url" => ENV['solr_url'],
 
-          :"orchestrator.configuration.location" => 'backbase/orchestrator/to-self-publishchains.xml',
+          :"orchestrator.configuration.location" => '.java-buildpack/tomcat/backbase/orchestrator/to-self-publishchains.xml',
           :"orchestrator.filestorelocation" => "backbase/orchestrator/fileStore",
+          :"orchestrator.import.location" => 'backbase/orchestrator/import',
+          :"orchestrator.export.location" => 'backbase/orchestrator/export',
+          :"orchestrator.export.log.location" => 'backbase/orchestrator/export/logs',
 
           }
         end

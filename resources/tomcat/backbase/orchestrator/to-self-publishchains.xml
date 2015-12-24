@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Publish chains for this orchestrator -->
+<publishChains>
+    <publishChain>
+        <publishChainName>Self - Approval on Package</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <requiresApproval>false</requiresApproval>
+                <portalMappings>
+                    <portalMapping>
+                        <sourcePortal>editorial</sourcePortal>
+                        <targetPortal>staging</targetPortal>
+                    </portalMapping>
+                </portalMappings>
+                <publishChainElements>
+                    <publishChainElement>
+                        <targetOrchestrator>Orchestrator</targetOrchestrator>
+                        <requiresApproval>false</requiresApproval>
+                        <updatePublishStates>true</updatePublishStates>
+                        <portalMappings>
+                            <portalMapping>
+                                <sourcePortal>editorial</sourcePortal>
+                                <targetPortal>live</targetPortal>
+                            </portalMapping>
+                        </portalMappings>
+                    </publishChainElement>
+                </publishChainElements>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+    <publishChain>
+        <publishChainName>Self - Approval on Pages</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <requiresApproval>true</requiresApproval>
+                <portalMappings>
+                    <portalMapping>
+                        <sourcePortal>editorial</sourcePortal>
+                        <targetPortal>staging</targetPortal>
+                    </portalMapping>
+                </portalMappings>
+                <publishChainElements>
+                    <publishChainElement>
+                        <targetOrchestrator>Orchestrator</targetOrchestrator>
+                        <requiresApproval>false</requiresApproval>
+                        <updatePublishStates>true</updatePublishStates>
+                        <portalMappings>
+                            <portalMapping>
+                                <sourcePortal>editorial</sourcePortal>
+                                <targetPortal>live</targetPortal>
+                            </portalMapping>
+                        </portalMappings>
+                    </publishChainElement>
+                </publishChainElements>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+    <publishChain>
+        <publishChainName>Self - Direct</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <updatePublishStates>true</updatePublishStates>
+                <portalMappings>
+                    <portalMapping>
+                        <sourcePortal>editorial</sourcePortal>
+                        <targetPortal>live</targetPortal>
+                    </portalMapping>
+                </portalMappings>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+    <!-- following chains are for publishing content only-->
+
+    <publishChain>
+        <publishChainName>Self:Content Only - Approval on Package</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <requiresApproval>false</requiresApproval>
+                <publishChainElements>
+                    <publishChainElement>
+                        <targetOrchestrator>Orchestrator</targetOrchestrator>
+                        <requiresApproval>false</requiresApproval>
+                        <updatePublishStates>true</updatePublishStates>
+                    </publishChainElement>
+                </publishChainElements>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+    <publishChain>
+        <publishChainName>Self:Content Only - Approval on Content Items</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <requiresApproval>true</requiresApproval>
+                <publishChainElements>
+                    <publishChainElement>
+                        <targetOrchestrator>Orchestrator</targetOrchestrator>
+                        <requiresApproval>false</requiresApproval>
+                        <updatePublishStates>true</updatePublishStates>
+                    </publishChainElement>
+                </publishChainElements>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+    <publishChain>
+        <publishChainName>Self:Content Only - Direct</publishChainName>
+        <publishChainElements>
+            <publishChainElement>
+                <targetOrchestrator>Orchestrator</targetOrchestrator>
+                <updatePublishStates>true</updatePublishStates>
+            </publishChainElement>
+        </publishChainElements>
+    </publishChain>
+</publishChains>
