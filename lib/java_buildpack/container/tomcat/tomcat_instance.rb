@@ -106,7 +106,7 @@ module JavaBuildpack
         document = read_xml context_xml
         context  = REXML::XPath.match(document, '/Context').first
         context.add_element('Environment', 'name'  => "backbase/config", 
-                                           'value' => "${catalina.home}/../backbase.properties",
+                                           'value' => "${catalina.home}/backbase.properties",
                                            'type'  => "java.lang.String", 'override' => "false")
 
         datastores = {
