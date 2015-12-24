@@ -19,6 +19,7 @@ require 'java_buildpack/component/versioned_dependency_component'
 require 'java_buildpack/container'
 require 'java_buildpack/container/tomcat/tomcat_utils'
 require 'java_buildpack/util/tokenized_version'
+require 'java_buildpack/container/backbase/properties_generator'
 
 module JavaBuildpack
   module Container
@@ -96,26 +97,45 @@ module JavaBuildpack
           configure_linking
           configure_jasper
 
-          override_resources if override_resources?
+          update_context
+          update_properties
         end
       end
 
-      def override_resources?
-        !!ENV["JBP_OVERRIDE_RESOURCE_PATH"]
+      def update_context
+        document = read_xml context_xml
+        context  = REXML::XPath.match(document, '/Context').first
+        context.add_element('Environment', name:  "backbase/config", 
+                                           value: "${catalina.home}/../backbase.properties",
+                                           type: "java.lang.String", override: "false")
+
+        datastores = {
+          portal:              {name: "jdbc/portalDS", database: 'portal'},
+          audit:               {name: "jdbc/auditDS", database: 'audit'},
+          tracking:            {name: "jdbc/trackingDS", database: 'tracking'},
+          content_datasource:  {name: "jdbc/content-datasource", database: 'content'},
+          orchestrator:        {name: "jdbc/orchestratorDS", database: 'orchestr'},
+        }
+
+        datastores.each_pair do |key, value|
+          context.add_element('Resource', name: value[:name], 
+            username: ENV['database_username'], 
+            password: ENV['database_password'],
+            url: "jdbc:mysql://#{ENV['database_host']}:#{ENV['database_port']}/#{value[:database]}?cacheServerConfiguration=true",
+            auth: "Container", type: "javax.sql.DataSource", maxActive: "4", maxIdle: "2", 
+            maxWait: "5000", validationQuery: "select 1", driverClassName: "com.mysql.jdbc.Driver",
+          )
+        end
+
+        write_xml context_xml, document
       end
 
-      def override_resources
-        resource_folder = ENV["JBP_OVERRIDE_RESOURCE_PATH"]
+      def update_properties
+        Backbase::PropertiesGenerator.save_properties_to_file(backbase_properties_file)
+      end
 
-        with_timing "Overriding resources located in folder #{resource_folder} defined by $JBP_OVERRIDE_RESOURCE_PATH varible" do
-          resource_path = File.join(@droplet.root, resource_folder)
-          target_path = File.join(@droplet.root, ".java-buildpack")
-          if File.exist?(resource_path)
-            FileUtils.cp_r("#{resource_path}/.", target_path)
-          else
-            puts "Can't find resource folder - Skipping override."
-          end
-        end
+      def backbase_properties_file
+        File.join(@droplet.sandbox, 'backbase.properties')
       end
 
       def root
