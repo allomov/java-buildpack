@@ -28,10 +28,11 @@ module JavaBuildpack
           :"orchestrator.contenthost.address" => ENV['orchestrator_url'],
           :"orchestrator.contenthost.contextpath"=>"/",
           :"orchestrator.contenthost.lockstrategy"=>"nooplocking",
+          :"orchestrator.contenthost.atompath" => 'atom',
           :"orchestrator.contenthost.repositoryid"=>"contentRepository",
           :"orchestrator.contenthost.username" => ENV['contentservice_username'],
           :"orchestrator.contenthost.password" => ENV['contentservice_password'],
-          :"orchestrator.portalhost.name"=>"portal",
+          :"orchestrator.portalhost.name"=>"editorial",
           :"orchestrator.portalhost.address" => ENV['portalservice_url'],
           :"orchestrator.portalhost.contextpath"=>"/",
           :"orchestrator.portalhost.username" => ENV['portalservice_username'],
@@ -48,9 +49,9 @@ module JavaBuildpack
           :"contentservices.database.hibernate.dialect.class"=>"org.hibernate.dialect.MySQL5Dialect",
           :"orchestrator.database"=>"mysql",
           :"database.orchestrator.hibernate.dialect.class"=>"org.hibernate.dialect.MySQL5Dialect",
-          :"orchestrator.orchestrators.Orchestrator.port"=>"80",
-          :"orchestrator.contenthost.port"=>"80",
-          :"orchestrator.portalhost.port"=>"80",
+          # :"orchestrator.orchestrators.Orchestrator.port"=>"80",
+          # :"orchestrator.contenthost.port"=>"80",
+          # :"orchestrator.portalhost.port"=>"80",
           :"foundation.content.proxy.destination" => ENV['contentservices_url'],
           :"foundation.orchestrator.proxy.destination" => ENV['orchestrator_url'],
           :"manager.solr.url" => ENV['solr_url'],
@@ -60,6 +61,11 @@ module JavaBuildpack
           :"orchestrator.import.location" => 'backbase/orchestrator/import',
           :"orchestrator.export.location" => 'backbase/orchestrator/export',
           :"orchestrator.export.log.location" => 'backbase/orchestrator/export/logs',
+
+          :"contentservices.repository.webdav.enabled" => "false"
+          :"contentservices.importlocation" => 'backbase/content/import'
+          :"contentservices.exportlocation" => 'backbase/content/export'
+          :"contentservices.repository.content.fileLocation" => 'backbase/content/filesystem'
 
           }
         end
