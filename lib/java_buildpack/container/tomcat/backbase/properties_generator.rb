@@ -62,10 +62,10 @@ module JavaBuildpack
           :"orchestrator.export.location" => 'backbase/orchestrator/export',
           :"orchestrator.export.log.location" => 'backbase/orchestrator/export/logs',
 
-          :"contentservices.repository.webdav.enabled" => "false"
-          :"contentservices.importlocation" => 'backbase/content/import'
-          :"contentservices.exportlocation" => 'backbase/content/export'
-          :"contentservices.repository.content.fileLocation" => 'backbase/content/filesystem'
+          :"contentservices.repository.webdav.enabled" => "false",
+          :"contentservices.importlocation" => 'backbase/content/import',
+          :"contentservices.exportlocation" => 'backbase/content/export',
+          :"contentservices.repository.content.fileLocation" => 'backbase/content/filesystem',
 
           }
         end
