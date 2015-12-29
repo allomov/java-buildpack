@@ -68,6 +68,10 @@ module JavaBuildpack
           :"contentservices.exportlocation" => 'backbase/content/export',
           :"contentservices.repository.content.fileLocation" => 'backbase/content/filesystem',
 
+          :"orchestrator.orchestrators.Orchestrator.port" => "80",
+          :"orchestrator.contenthost.port" => "80",
+          :"orchestrator.portalhost.port" => "80",
+
           }
         end
 

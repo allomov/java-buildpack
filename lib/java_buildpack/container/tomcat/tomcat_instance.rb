@@ -114,11 +114,11 @@ module JavaBuildpack
                                            'type'  => "java.lang.String", 'override' => "false")
 
         datastores = {
-          portal:              {name: "jdbc/portalDS", database: 'portal'},
-          audit:               {name: "jdbc/auditDS", database: 'audit'},
-          tracking:            {name: "jdbc/trackingDS", database: 'tracking'},
+          portal:              {name: "jdbc/portalDS",           database: 'portal'},
+          audit:               {name: "jdbc/auditDS",            database: 'audit'},
+          tracking:            {name: "jdbc/trackingDS",         database: 'tracking'},
           content_datasource:  {name: "jdbc/content-datasource", database: 'content'},
-          orchestrator:        {name: "jdbc/orchestratorDS", database: 'orchestr'},
+          orchestrator:        {name: "jdbc/orchestratorDS",     database: 'orchestr'},
         }
 
         datastores.each_pair do |key, value|
