@@ -19,17 +19,22 @@ $stdout.sync = true
 $stderr.sync = true
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 
-require 'java_buildpack/buildpack'
+# require 'java_buildpack/buildpack'
 
 build_dir = ARGV[0]
 
-components = JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Detect failed with exception %s') do |buildpack|
-  buildpack.detect
-end.compact
+# components = JavaBuildpack::Buildpack.with_buildpack(build_dir, 'Detect failed with exception %s') do |buildpack|
+#   buildpack.detect
+# end.compact
 
-if components.empty?
-  abort
-else
-  str = components.join(' ')
-  puts str.length > 255 ? str.slice(0..251) + '...' : str
-end
+# if components.empty?
+#   abort
+# else
+#   str = components.join(' ')
+#   puts str.length > 255 ? str.slice(0..251) + '...' : str
+# end
+
+puts "This buildpack will always be used"
+puts "This is done because it is supposed to be set as a buildpack during 'cf push' command"
+
+exit 0
