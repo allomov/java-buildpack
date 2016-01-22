@@ -5,14 +5,14 @@ module JavaBuildpack
         def self.default_properties
           @default_properties ||= {
           :"foundation.environment.editorial" => "true",
-          :"foundation.versioning.enabled" => "true",
+          :"foundation.versioning.enabled" => "false",
           :"foundation.auditing" => "true",
           :"orchestrator.auditing" => "true",
           :"foundation.ptc.profile" => "ptc-local",
-          # :"foundation.exportimport.profile"=>"ps-exportimport-none",
+          :"foundation.exportimport.profile"=>"ps-exportimport-none",
           # :"foundation.exportimport.profile" => 'ps-exportimport-fs',
           # :"foundation.filesystem.contextroot" => 'backbase/portal/contextRoot',
-          :"foundation.exportimport.profile" => 'ps-exportimport-cs',
+          # :"foundation.exportimport.profile" => 'ps-exportimport-cs',
           :"contentservices.dbstore.max-size" => "2",
           :"orchestrator.name" => "Orchestrator",
           :"orchestrator.editorial" => "true",
